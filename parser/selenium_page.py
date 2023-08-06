@@ -16,7 +16,7 @@ class UseSelenium:
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--headless")
 
-        s = Service(executable_path="lib/chromedriver")
+        s = Service(executable_path="parser/lib/chromedriver")
 
         driver = webdriver.Chrome(service=s, options=options)
 
@@ -26,7 +26,9 @@ class UseSelenium:
             driver.execute_script("window.scrollTo(5,4000);")
             time.sleep(5)
             html = driver.page_source
-            with open('pages/' + self.filename, 'w', encoding='utf-8') as f:
+            with open(
+                'parser/pages/' + self.filename, 'w', encoding='utf-8'
+            ) as f:
                 f.write(html)
         except Exception as ex:
             print(ex)

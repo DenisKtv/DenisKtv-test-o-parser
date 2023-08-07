@@ -8,7 +8,7 @@ from api_parser.product_parser.get_product_data import parse_all_products
 
 
 @shared_task
-def parse_products():
+def parse_products(products_count):
     # Скачиваем страницы с продуктами
     download_pages()
 
@@ -16,7 +16,7 @@ def parse_products():
     parse_links_from_pages()
 
     # Получаем JSON данные продуктов по ссылкам
-    fetch_json_files_from_links()
+    fetch_json_files_from_links(products_count)
 
     # Парсим данные продуктов из JSON файлов
     products_data = parse_all_products()

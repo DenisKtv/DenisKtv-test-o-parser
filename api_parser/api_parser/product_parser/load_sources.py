@@ -16,7 +16,9 @@ class UseSelenium:
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--headless")
 
-        s = Service(executable_path="parser/lib/chromedriver")
+        s = Service(
+            executable_path="api_parser/product_parser/lib/chromedriver"
+        )
 
         driver = webdriver.Chrome(service=s, options=options)
 
@@ -27,7 +29,9 @@ class UseSelenium:
             time.sleep(5)
             html = driver.page_source
             with open(
-                'parser/pages/' + self.filename, 'w', encoding='utf-8'
+                'api_parser/product_parser/pages/' + self.filename,
+                'w',
+                encoding='utf-8'
             ) as f:
                 f.write(html)
         except Exception as ex:
@@ -37,6 +41,22 @@ class UseSelenium:
             driver.quit()
 
 
+def download_pages():
+    url = "https://ozon.by/seller/proffi-1/products/?miniapp=seller_1"
+
+    # Ограничим парсинг первыми 2 страницами
+    MAX_PAGE = 2
+    i = 1
+    while i <= MAX_PAGE:
+        filename = 'page_' + str(i) + '.html'
+        if i == 1:
+            UseSelenium(url, filename).save_page()
+        else:
+            url_param = url + '?page=' + str(i)
+            UseSelenium(url_param, filename).save_page()
+
+        i += 1
+
+
 if __name__ == '__main__':
-    selenium_instance = UseSelenium('https://www.example.com', 'example.html')
-    selenium_instance.save_page()
+    download_pages()

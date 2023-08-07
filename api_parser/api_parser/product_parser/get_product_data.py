@@ -84,22 +84,26 @@ def get_description_from_json(json_data: dict) -> tuple:
         return None, None
 
 
-# получаем список всех html файлов в текущей директории
-filenames = sorted(glob.glob("parser/products/*.html"), key=lambda name: int(
-    name.split('/')[-1].split('.')[0])
-)
+def parse_all_products():
+    products = []
+    filenames = sorted(
+        glob.glob("api_parser/product_parser/products/*.html"),
+        key=lambda name: int(name.split('/')[-1].split('.')[0])
+    )
 
-
-# проходим по каждому файлу в списке
-for filename in filenames:
-    print(f"Processing file: {filename}")
-    json_data = get_json(filename)
-    title = get_description_from_json(json_data)
-    description, link = get_description_from_json(json_data)
-    print(f"Description: {description}")
-    print(f"Link: {link}")
-    title, price, original_price, cover_image = get_info_from_json(json_data)
-    print(f"Title: {title}")
-    print(f"Price: {price}")
-    print(f"Original Price: {original_price}")
-    print(f"Cover Image: {cover_image}")
+    for filename in filenames:
+        print(f"Processing file: {filename}")
+        data = get_json(filename)
+        description, link = get_description_from_json(data)
+        title, price, original_price, cover_image = get_info_from_json(data)
+        product = {
+            'title': title,
+            'description': description,
+            'link': link,
+            'price': price,
+            'original_price': original_price,
+            'cover_image': cover_image
+        }
+        products.append(product)
+    print(products)
+    return products

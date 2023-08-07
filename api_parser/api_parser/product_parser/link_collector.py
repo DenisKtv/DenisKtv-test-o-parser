@@ -3,7 +3,7 @@ import glob
 
 
 def get_pages() -> list:
-    return glob.glob('parser/pages/*.html')
+    return glob.glob('api_parser/product_parser/pages/*.html')
 
 
 def get_html(page: str):
@@ -15,7 +15,8 @@ def parse_data(html: str) -> list:
     soup = BeautifulSoup(html, 'html.parser')
 
     links = []
-    products_elements = soup.find_all('div', attrs={'class': 'i9j ik'})
+    # Класс меняется с каким-то интервалом
+    products_elements = soup.find_all('div', attrs={'class': 'io3 o3i'})
 
     for element in products_elements:
         products = element.find_all('a')
@@ -27,7 +28,7 @@ def parse_data(html: str) -> list:
     return links
 
 
-def main():
+def parse_links_from_pages():
     pages = get_pages()
 
     all_links = []
@@ -37,10 +38,10 @@ def main():
         links = parse_data(html)
         all_links.extend(links)
 
-    with open('parser/product_links.txt', 'w', encoding='utf-8') as f:
+    with open(
+        'api_parser/product_parser/product_links.txt',
+        'w',
+        encoding='utf-8'
+    ) as f:
         for link in all_links:
             f.write(link + '\n')
-
-
-if __name__ == '__main__':
-    main()

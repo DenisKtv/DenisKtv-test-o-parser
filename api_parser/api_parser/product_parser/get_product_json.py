@@ -28,7 +28,9 @@ class UseSelenium:
                 'innerHTML'
             )
             with open(
-                'parser/products/' + self.filename, 'w', encoding='utf-8'
+                'api_parser/product_parser/products/' + self.filename,
+                'w',
+                encoding='utf-8'
             ) as f:
                 f.write(elem)
         except Exception as ex:
@@ -48,3 +50,29 @@ class UseSelenium:
         return {
             'user-agent': random.choice(user_agents),
         }
+
+
+def get_product_links() -> list:
+    with open(
+        'api_parser/product_parser/product_links.txt',
+        'r',
+        encoding='utf-8'
+    ) as f:
+        return f.readlines()
+
+
+def data_parsing(product: str, i: int, filename: str) -> None:
+    url = 'https://www.ozon.by/api/composer-api.bx/page/json/v2' \
+          f'?url={product}'
+
+    filename = filename + str(i) + '.html'
+    print(f"Processing URL: {url}")
+    UseSelenium(url, filename).save_page()
+
+
+def fetch_json_files_from_links(products_count=10):
+    products = get_product_links()
+    products_count = min(products_count, 50)
+
+    for i, product in enumerate(products[:products_count], start=1):
+        data_parsing(product, i, filename='')

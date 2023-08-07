@@ -1,3 +1,7 @@
+import os
+import requests
+
+from dotenv import load_dotenv
 from celery import shared_task
 from .models import Product
 
@@ -5,6 +9,17 @@ from api_parser.product_parser.load_sources import download_pages
 from api_parser.product_parser.link_collector import parse_links_from_pages
 from api_parser.product_parser.get_product_json import fetch_json_files_from_links
 from api_parser.product_parser.get_product_data import parse_all_products
+
+load_dotenv()
+
+
+def send_telegram_message(chat_id, text, token):
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    payload = {
+        "chat_id": chat_id,
+        "text": text
+    }
+    requests.post(url, data=payload)
 
 
 @shared_task
@@ -35,4 +50,10 @@ def parse_products(products_count):
 
     print(f"{len(products_data)} products have been saved to the database.")
 
-    return f"{len(products_data)} products parsed and saved."
+    # Отправляем уведомление в Telegram
+    chat_id = os.getenv('MY_CHAT')
+    token = os.getenv('ADMIN_TOKEN')
+    text = f"{len(products_data)} products parsed and saved."
+    send_telegram_message(chat_id, text, token)
+
+    return text

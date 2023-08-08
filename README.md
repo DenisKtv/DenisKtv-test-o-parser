@@ -35,10 +35,6 @@ DenisKtv-test-o-parser/api_parser/api_parser/product_parser/
 в файле load_sources можно заменить ozone.by на ozone.ru или ozone.kz в зависимости от вашего региона!
 
 
-```bash
-python -m venv venv
-```
-
 * Cоздать и активировать виртуальное окружение:
 
 ```bash

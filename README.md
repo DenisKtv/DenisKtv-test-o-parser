@@ -12,11 +12,14 @@
 [![Celery](https://img.shields.io/badge/-Celery-464646?style=flat-square&logo=Celery)](https://celeryproject.org/)
 [![Redis](https://img.shields.io/badge/-Redis-464646?style=flat-square&logo=Redis)](https://redis.io/)
 [![Selenium](https://img.shields.io/badge/-Selenium-464646?style=flat-square&logo=Selenium)](https://www.selenium.dev/)
+[![AdminLTE](https://img.shields.io/badge/-AdminLTE-000000?style=flat-square&logo=AdminLTE&logoColor=white)](https://adminlte.io/)
+[![Django DRF-YASG](https://img.shields.io/badge/-Django%20DRF--YASG-464646?style=flat-square&logo=Django)](https://drf-yasg.readthedocs.io/)
+
 
 
 ## Описание проекта
 
-Данный проект выполняет парсинг данных с Озон по Post-запросу, основываясь на атрибуте, введённом пользователем. В случае отсутствия атрибута, система автоматически парсит 10 продуктов. После успешного завершения процесса парсинга, телеграм-бот уведомляет пользователя о выполнении задачи. Команда 'Список товаров' активирует бота для отображения продуктов и соответствующих ссылок с последнего сеанса парсинга. Кроме того, возможен просмотр как всего списка продуктов, так и информации о конкретном продукте через Get-запрос.
+Данный проект выполняет парсинг данных с Озон по Post-запросу, основываясь на атрибуте, введённом пользователем. В случае отсутствия атрибута, система автоматически парсит 10 продуктов. После успешного завершения процесса парсинга, телеграм-бот уведомляет пользователя о выполнении задачи. Команда 'Список товаров' активирует бота для отображения продуктов и соответствующих ссылок с последнего сеанса парсинга. Кроме того, возможен просмотр как всего списка продуктов, так и информации о конкретном продукте через Get-запрос. Так же в проекте настроена AdminLTE панель и документация Django drf-yasg.
 
 ## Установка проекта локально
 
@@ -86,15 +89,17 @@ sudo apt install redis-server
 redis-serve
 ```
 Для Windows:
+
 Скачать и установить и запустить по инструкции: https://github.com/microsoftarchive/redis
-<img src="images/redis.png" alt="Alt text" title="Optional Title" width="200" />
+
+<img src="images/redis.png" alt="Alt text" title="Optional Title" width="300" />
 
 Откройте новое окно консоли для Celery:
 ```bash
 cd DenisKtv-test-o-parser/api_parser
 celery -A api_parser worker --loglevel=info
 ```
-<img src="images/celery.png" alt="Alt text" title="Optional Title" width="200" />
+<img src="images/celery.png" alt="Alt text" title="Optional Title" width="300" />
 
 ## Для запуска ботa локально:
 Перейти в нужный репозиторий и запустить ботов:
@@ -102,9 +107,9 @@ celery -A api_parser worker --loglevel=info
 cd bots/
 python bot.py
 ``` 
-<img src="images/tg.png" alt="Alt text" title="Optional Title" width="200" />
+<img src="images/tg.png" alt="Alt text" title="Optional Title" width="400" />
 
 ## Примеры запросов:
-<img src="images/example1.png" alt="Alt text" title="Optional Title" width="200" />
-<img src="images/example2.png" alt="Alt text" title="Optional Title" width="200" />
-<img src="images/example3.png" alt="Alt text" title="Optional Title" width="200" />
+<img src="images/example1.png" alt="Alt text" title="Optional Title" width="400" />
+<img src="images/example2.png" alt="Alt text" title="Optional Title" width="400" />
+<img src="images/example3.png" alt="Alt text" title="Optional Title" width="400" />

@@ -3,26 +3,26 @@ from django.db import models
 
 class Product(models.Model):
     title = models.CharField(
-        verbose_name='Заголовок',
+        'Заголовок',
         max_length=255
     )
     description = models.TextField(
-        verbose_name='Описание'
+        'Описание'
     )
     link = models.URLField(
-        verbose_name='Ссылка',
+        'Ссылка',
         max_length=1024
         )
     price = models.CharField(
-        verbose_name='Цена',
+        'Цена',
         max_length=50
     )
     original_price = models.CharField(
-        verbose_name='Цена до скидки',
+        'Цена до скидки',
         max_length=50
     )
     image = models.URLField(
-        verbose_name='Изображение товара',
+        'Изображение товара',
         max_length=1024
     )
 
@@ -32,3 +32,22 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ParserConfiguration(models.Model):
+    products_count = models.PositiveIntegerField(
+        'Количество продуктов для парсинга',
+        default=10,
+    )
+    pub_date = models.DateTimeField(
+        'Дата парсинга',
+        auto_now_add=True
+    )
+
+    class Meta:
+        verbose_name = 'Конфигурация парсера'
+        verbose_name_plural = 'Конфигурации парсера'
+
+    def __str__(self):
+        return (f'Конфигурация парсинга (количество продуктов: '
+                f'{self.products_count})')

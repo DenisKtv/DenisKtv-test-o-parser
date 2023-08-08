@@ -28,15 +28,24 @@ def parse_data(html: str) -> list:
     return links
 
 
-def parse_links_from_pages():
+def parse_links_from_pages(products_count):
     pages = get_pages()
 
     all_links = []
+    counter = 0
 
     for page in pages:
         html = get_html(page)
         links = parse_data(html)
-        all_links.extend(links)
+
+        for link in links:
+            if counter >= products_count:
+                break
+            all_links.append(link)
+            counter += 1
+
+        if counter >= products_count:
+            break
 
     with open(
         'api_parser/product_parser/product_links.txt',

@@ -4,20 +4,19 @@ from rest_framework.views import APIView
 from .tasks import parse_products
 from .serializers import ProductSerializer
 from .models import Product
-from rest_framework.generics import ListAPIView
 from rest_framework.generics import RetrieveAPIView
 
 
-class ProductListView(ListAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+class ProductView(APIView):
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
 
-
-class StartParsingView(APIView):
     def post(self, request):
         products_count = request.data.get('products_count', 10)
         products_count = min(int(products_count), 50)
-
+        print(products_count)
         parse_products.delay(products_count)
 
         return Response(

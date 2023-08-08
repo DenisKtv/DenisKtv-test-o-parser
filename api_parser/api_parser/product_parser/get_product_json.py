@@ -16,15 +16,15 @@ class UseSelenium:
 
         options = uc.ChromeOptions()
         options.add_argument(f"user-agent={persona['user-agent']}")
-        options.add_argument("--disable-blink-features=AutomationControlled")
-        options.add_argument("--headless")
+        options.add_argument('--disable-blink-features=AutomationControlled')
+        options.add_argument('--headless')
         options.add_argument('--disable-gpu')  # Если используется Windows
 
         driver = uc.Chrome(options=options)
 
         try:
             driver.get(self.url)
-            elem = driver.find_element(By.TAG_NAME, "pre").get_attribute(
+            elem = driver.find_element(By.TAG_NAME, 'pre').get_attribute(
                 'innerHTML'
             )
             with open(
@@ -66,7 +66,6 @@ def data_parsing(product: str, i: int, filename: str) -> None:
           f'?url={product}'
 
     filename = filename + str(i) + '.html'
-    print(f"Processing URL: {url}")
     UseSelenium(url, filename).save_page()
 
 

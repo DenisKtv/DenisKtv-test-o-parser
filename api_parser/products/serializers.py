@@ -14,8 +14,8 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_discount(self, obj):
         original_price = float(
-            obj.original_price.replace(",", ".").replace(" BYN", "")
+            obj.original_price.replace(',', '.').replace(' BYN', '')
         )
-        price = float(obj.price.replace(",", ".").replace(" BYN", ""))
+        price = float(obj.price.replace(',', '.').replace(' BYN', ''))
         disc = (original_price - price) / original_price * 100
         return f'{round(disc, 1)}%'

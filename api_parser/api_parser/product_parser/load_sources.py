@@ -10,14 +10,14 @@ class UseSelenium:
 
     def save_page(self):
         options = webdriver.ChromeOptions()
-        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64;"
-                             "x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-                             "Chrome/114.0.5735.90 Safari/537.3")
-        options.add_argument("--disable-blink-features=AutomationControlled")
-        options.add_argument("--headless")
+        options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64;'
+                             'x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                             'Chrome/114.0.5735.90 Safari/537.3')
+        options.add_argument('--disable-blink-features=AutomationControlled')
+        options.add_argument('--headless')
 
         s = Service(
-            executable_path="api_parser/product_parser/lib/chromedriver"
+            executable_path='api_parser/product_parser/lib/chromedriver'
         )
 
         driver = webdriver.Chrome(service=s, options=options)
@@ -25,7 +25,7 @@ class UseSelenium:
         try:
             driver.get(self.url)
             time.sleep(3)
-            driver.execute_script("window.scrollTo(5,4000);")
+            driver.execute_script('window.scrollTo(5,4000);')
             time.sleep(5)
             html = driver.page_source
             with open(
@@ -42,9 +42,8 @@ class UseSelenium:
 
 
 def download_pages():
-    url = "https://ozon.by/seller/proffi-1/products/?miniapp=seller_1"
+    url = 'https://ozon.by/seller/proffi-1/products/?miniapp=seller_1'
 
-    # Ограничим парсинг первыми 2 страницами
     MAX_PAGE = 2
     i = 1
     while i <= MAX_PAGE:

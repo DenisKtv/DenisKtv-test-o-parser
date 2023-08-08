@@ -1,5 +1,6 @@
-from bs4 import BeautifulSoup
 import glob
+
+from bs4 import BeautifulSoup
 
 
 def get_pages() -> list:

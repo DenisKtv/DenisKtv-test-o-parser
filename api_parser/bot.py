@@ -1,13 +1,13 @@
 import os
+
 import django
 from dotenv import load_dotenv
-from telegram.ext import MessageHandler, Filters
-from telegram.ext import Updater, CommandHandler
+from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'api_parser.settings')
 django.setup()
 
-from products.models import Product, ParserConfiguration
+from products.models import ParserConfiguration, Product
 
 load_dotenv()
 

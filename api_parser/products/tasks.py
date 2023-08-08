@@ -1,17 +1,16 @@
 import os
+
 import requests
-
-from dotenv import load_dotenv
 from celery import shared_task
-from .models import Product, ParserConfiguration
-
-from api_parser.product_parser.load_sources import download_pages
-from api_parser.product_parser.link_collector import parse_links_from_pages
-from api_parser.product_parser.get_product_json import (
-    fetch_json_files_from_links
-)
+from dotenv import load_dotenv
 
 from api_parser.product_parser.get_product_data import parse_all_products
+from api_parser.product_parser.get_product_json import \
+    fetch_json_files_from_links
+from api_parser.product_parser.link_collector import parse_links_from_pages
+from api_parser.product_parser.load_sources import download_pages
+
+from .models import ParserConfiguration, Product
 
 load_dotenv()
 

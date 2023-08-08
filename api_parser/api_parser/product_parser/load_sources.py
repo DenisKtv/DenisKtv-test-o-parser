@@ -1,6 +1,7 @@
-from seleniumwire import webdriver
-from selenium.webdriver.chrome.service import Service
 import time
+
+from selenium.webdriver.chrome.service import Service
+from seleniumwire import webdriver
 
 
 class UseSelenium:

@@ -1,10 +1,11 @@
 from rest_framework import status
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .tasks import parse_products
-from .serializers import ProductSerializer
+
 from .models import Product
-from rest_framework.generics import RetrieveAPIView
+from .serializers import ProductSerializer
+from .tasks import parse_products
 
 
 class ProductView(APIView):

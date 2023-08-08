@@ -1,5 +1,5 @@
-import json
 import glob
+import json
 
 
 def get_json(filename: str) -> dict:

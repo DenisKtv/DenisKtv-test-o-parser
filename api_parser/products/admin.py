@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Product, ParserConfiguration
+
+from .models import ParserConfiguration, Product
 
 
 @admin.register(Product)

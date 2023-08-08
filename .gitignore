@@ -163,3 +163,4 @@ api_parser/api_parser/product_parser/products/*
 api_parser/api_parser/product_parser/pages/*
 product_links.txt
 static/*
+api_parser/static/*
